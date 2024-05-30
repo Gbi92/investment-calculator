@@ -14,6 +14,8 @@ const INITIAL_INVESTMENT_DETAILS = {
 function App() {
   const [userInput, setUserInput] = useState(INITIAL_INVESTMENT_DETAILS);
 
+  const inputIsValid = userInput.duration >= 1;
+
   function handleInputChange(event, inputIdentifier) {
     const {
       target: { value },
@@ -29,7 +31,8 @@ function App() {
     <>
       <Header />;
       <UserInput userInput={userInput} onChangeInput={handleInputChange} />
-      <Results userInput={userInput} />
+      {!inputIsValid && <p className="center">Please enter valid input data</p>}
+      {inputIsValid && <Results userInput={userInput} />}
     </>
   );
 }
